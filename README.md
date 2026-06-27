@@ -6,6 +6,41 @@ Think DBeaver / DataGrip, but in your terminal — with full vim keybindings, yo
 config, and your existing dbt connections. No new credentials, no GUI, no leaving the keyboard.
 
 ![hero](./assets/hero.png)
+
+## Quickstart
+
+First time? Here's zero-to-querying.
+
+**1. Install the prerequisites**
+
+- [neovim](https://neovim.io) ≥ 0.8 — the embedded editor
+- [uv](https://github.com/astral-sh/uv) — bootstraps refractui's private dbt environment (no global dbt install needed)
+- [Rust](https://rustup.rs) — to build and install refractui
+
+**2. Install refractui**
+
+```bash
+cargo install --git https://github.com/MiConnell/refractui
+```
+
+> Prebuilt binaries and `brew install` arrive with the first tagged release. Until then, install
+> from source as above (or clone and run `cargo install --path .`).
+
+**3. Point it at your warehouse**
+
+refractui reads `~/.dbt/profiles.yml`. If you already use dbt, you're done — it reuses those
+connections. Otherwise add at least one connection there.
+
+**4. Run it**
+
+```bash
+refractui
+```
+
+Press `Ctrl-c` to pick a connection, write SQL in the editor pane, and `Ctrl-e` to run. The first
+time you use a given warehouse, refractui installs the matching `dbt-<adapter>` into its private
+venv automatically.
+
 ## Features
 
 - **Real neovim for editing** — `nvim --embed`, so your config, plugins, and muscle memory all work.
