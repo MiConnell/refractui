@@ -1,0 +1,11 @@
+#!/bin/sh
+# Fast check on every commit; the heavier CI-mirror runs in pre-push.
+# Bypass with `git commit --no-verify` if you really need to.
+set -e
+
+echo "pre-commit: cargo fmt --all --check"
+if ! cargo fmt --all --check; then
+    echo
+    echo "✗ Formatting issues. Run 'cargo fmt --all' and re-commit." >&2
+    exit 1
+fi

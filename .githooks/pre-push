@@ -1,0 +1,15 @@
+#!/bin/sh
+# Mirror the CI gates so we don't burn runner minutes on avoidable failures.
+# Bypass with `git push --no-verify` if you really need to.
+set -e
+
+echo "pre-push: cargo fmt --all --check"
+cargo fmt --all --check
+
+echo "pre-push: cargo clippy --all-targets -- -D warnings"
+cargo clippy --all-targets -- -D warnings
+
+echo "pre-push: cargo test"
+cargo test
+
+echo "✓ pre-push checks passed"
